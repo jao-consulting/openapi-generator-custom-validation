@@ -1,0 +1,42 @@
+openapi: "3.0.3"
+info:
+  description: "This project provides endpoints for calculating your taxes depending on your fiscal revenue."
+  version: "@project.version@"
+  title: "TaxSmart API"
+
+
+paths:
+  /person:
+    post:
+      summary: "create a person with necessary info"
+      operationId: "createPerson"
+      tags:
+        - "Person"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonDTO'
+      responses:
+        "200":
+          description: "Your tax"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonDTO"
+
+components:
+  schemas:
+    PersonDTO:
+      type: object
+      required: [ name, birthDate, has_driver_license ]
+      properties:
+        name:
+          x-field-extra-annotation: '@NotEmpty'
+          type: string
+        birthDate:
+          type: string
+          format: date
+        has_driver_license:
+          type: boolean
