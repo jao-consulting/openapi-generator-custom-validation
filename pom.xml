@@ -78,6 +78,9 @@
                         <configuration>
                             <skipValidateSpec>true</skipValidateSpec>
                             <inputSpec>${project.basedir}/src/main/resources/openapi/in/openapi.yml</inputSpec>
+                            <templateDirectory>
+                                ${project.basedir}/src/main/resources/openapi/templates
+                            </templateDirectory>
                             <generatorName>spring</generatorName>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <configOptions>

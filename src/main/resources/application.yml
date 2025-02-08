@@ -8,6 +8,8 @@ management:
     include: health,info,metrics,prometheus
 
 spring:
+  web:
+    locale: en_US
   application:
     name: openapi-generator-custom-validation
 

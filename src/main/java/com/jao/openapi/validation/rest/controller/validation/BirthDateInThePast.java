@@ -24,14 +24,8 @@ public @interface BirthDateInThePast {
 			ConstraintValidator<BirthDateInThePast, LocalDate> {
 
 		@Override
-		public void initialize(BirthDateInThePast contactNumber) {
-		}
-
-		@Override
-		public boolean isValid(LocalDate birthDate,
-				ConstraintValidatorContext cxt) {
-			return Optional.ofNullable(birthDate)
-					.map(localDate -> localDate.isBefore(LocalDate.now())).orElse(true);
+		public boolean isValid(LocalDate birthDate, ConstraintValidatorContext context) {
+			return birthDate == null || birthDate.isBefore(LocalDate.now());
 		}
 
 	}

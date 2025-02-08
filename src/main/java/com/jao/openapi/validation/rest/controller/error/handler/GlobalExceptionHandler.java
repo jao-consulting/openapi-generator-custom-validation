@@ -16,15 +16,18 @@ public class GlobalExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorResponse handleValidationExceptions(
 			MethodArgumentNotValidException ex) {
-		List<String> errors = ex.getBindingResult()
+		String fieldErrors = ex.getBindingResult()
 				.getFieldErrors()
 				.stream()
 				.map(error -> error.getField() + ": " + error.getDefaultMessage())
-				.toList();
+				.toList().toString();
 
+		String objectErrors = ex.getBindingResult().getAllErrors().stream().
+				map(objectError -> objectError.getObjectName() + ": " + objectError.getDefaultMessage())
+				.toList().toString();
 		return new ErrorResponse(
 				"Validation Failed",
-				errors.toString()
+				fieldErrors.concat(objectErrors)
 		);
 	}
 

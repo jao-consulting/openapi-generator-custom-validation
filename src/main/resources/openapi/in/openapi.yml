@@ -1,8 +1,8 @@
 openapi: "3.0.3"
 info:
-  description: "This project provides endpoints for calculating your taxes depending on your fiscal revenue."
+  description: "This project provides endpoints for creating persons"
   version: "@project.version@"
-  title: "TaxSmart API"
+  title: "Person API"
 
 
 paths:
@@ -20,7 +20,7 @@ paths:
               $ref: '#/components/schemas/PersonDTO'
       responses:
         "200":
-          description: "Your tax"
+          description: "The Person"
           content:
             application/json:
               schema:
@@ -30,12 +30,14 @@ components:
   schemas:
     PersonDTO:
       type: object
+      x-class-extra-annotation: '@DriverAgeValidation'
       required: [ name, birthDate, has_driver_license ]
       properties:
         name:
-          x-field-extra-annotation: '@NotEmpty'
           type: string
+          x-field-extra-annotation: '@NotEmpty'
         birthDate:
+          x-field-extra-annotation: '@BirthDateInThePast'
           type: string
           format: date
         has_driver_license:
